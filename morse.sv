@@ -12,10 +12,23 @@
 */
 
 module morse(Clock, Reset, dot, dash, out);
-
-    enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,
-          zero,one,two,three,four,five,six,seven,eight,nine,
-          decoding, beforeTwo, beforeEight, zeroORnine} ps, ns;
+    input logic Clock, Reset, dot, dash;
+    logic [5:0] ps, ns;
+    output logic [5:0] out;
+    // numbers
+    parameter [5:0]  zero = 6'b000000,  one = 6'b000001, two = 6'b000010, three = 6'b000011,
+                     four = 6'b000100, five = 6'b000101, six = 6'b000110, seven = 6'b000111,
+                    eight = 6'b001000, nine = 6'b001001;
+    // alphabets
+    parameter [5:0] A = 6'b001010, B = 6'b001011, C = 6'b001100, D = 6'b001101,
+                    E = 6'b001110, F = 6'b001111, G = 6'b010000, H = 6'b010001,
+                    I = 6'b010010, J = 6'b010011, K = 6'b010100, L = 6'b010101,
+                    M = 6'b010110, N = 6'b010111, O = 6'b011000, P = 6'b011001,
+                    Q = 6'b011010, R = 6'b011011, S = 6'b011100, T = 6'b011101,
+                    U = 6'b011110, V = 6'b011111, W = 6'b100000, X = 6'b100001,
+                    Y = 6'b100010, Z = 6'b100011;    
+    // special states
+    parameter [5:0] decoding = 6'b100100, beforeTwo = 6'b100101, beforeEight = 6'b100110, zeroORnine = 6'b100111;
 
     always_comb begin
         case (ps)
@@ -173,6 +186,8 @@ module morse(Clock, Reset, dot, dash, out);
                 end
         endcase
     end
+
+    assign out = ps;
 
     always_ff @(posedge Clock)
         if (Reset)
