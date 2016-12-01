@@ -15,7 +15,7 @@ module morse(Clock, Reset, dot, dash, out);
 
     enum {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,
           zero,one,two,three,four,five,six,seven,eight,nine,
-          decoding} ps, ns;
+          decoding, beforeTwo, beforeEight, zeroORnine} ps, ns;
 
     always_comb begin
         case (ps)
@@ -37,8 +37,6 @@ module morse(Clock, Reset, dot, dash, out);
                 begin
                     if (dot & ~dash)
                         ns = six;
-                    else if (~dot & ~dash)
-                        ns = B
                 end
             C:
                 begin
@@ -55,231 +53,126 @@ module morse(Clock, Reset, dot, dash, out);
             E:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = I;
                     else if (~dot & dash)
-                        ns = T;
-                end
-            F:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                        ns = A;
                 end
             G:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = Z;
                     else if (~dot & dash)
-                        ns = T;
+                        ns = Q;
                 end
             H:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = five;
                     else if (~dot & dash)
-                        ns = T;
+                        ns = four;
                 end
             J:
                 begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                    if (~dot & dash)
+                        ns = one;
                 end
             K:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = C;
                     else if (~dot & dash)
-                        ns = T;
-                end
-            L:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                        ns = Y;
                 end
             M:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = G;
                     else if (~dot & dash)
-                        ns = T;
+                        ns = O;
                 end
             N:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = D;
                     else if (~dot & dash)
-                        ns = T;
+                        ns = K;
                 end
             O:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = beforeEight;
                     else if (~dot & dash)
-                        ns = T;
-                end
-            P:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            Q:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                        ns = zeroORnine;
                 end
             R:
                 begin
                     if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                        ns = L;
                 end
             S:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = H;
                     else if (~dot & dash)
-                        ns = T;
+                        ns = V;
                 end
             T:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = N;
                     else if (~dot & dash)
-                        ns = T;
+                        ns = M;
                 end
             U:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = F;
                     else if (~dot & dash)
-                        ns = T;
+                        ns = beforeTwo;
                 end
             V:
                 begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                    if (~dot & dash)
+                        ns = three;
                 end
             W:
                 begin
                     if (dot & ~dash)
-                        ns = E;
+                        ns = P;
                     else if (~dot & dash)
-                        ns = T;
-                end
-            X:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            Y:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                        ns = J;
                 end
             Z:
                 begin
                     if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                        ns = seven;
                 end
-            zero:
+            beforeTwo:
+                begin
+                    if (~dot & dash)
+                        ns = two;
+                end
+            beforeEight:
                 begin
                     if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                        ns = eight;
                 end
-            one:
+            zeroORnine:
                 begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            two:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            three:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            four:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            five:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            six:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            seven:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            eight:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
-                end
-            nine:
-                begin
-                    if (dot & ~dash)
-                        ns = E;
-                    else if (~dot & dash)
-                        ns = T;
+                    if (~dot & dash)
+                        ns = zero;
+                    else if (dot & ~dash)
+                        ns = nine;
                 end
             default: 
                 begin
                     if (~dot & ~dash)
                         ns = ps;
                     else
-                    ns = decoding;
-                    out = 6'b111111;
+                        ns = decoding;
                 end
         endcase
     end
-
 
     always_ff @(posedge Clock)
         if (Reset)
