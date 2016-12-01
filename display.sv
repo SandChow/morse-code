@@ -3,7 +3,7 @@ module display(state, HEX0);
     output logic [6:0] HEX0, HEX1;
     always_comb begin
         case (state)
-                      // Light: 6543210`
+                        // Light: 6543210`
             6'b000000: HEX0 = ~7'b0111111; // 0
             6'b000001: HEX0 = ~7'b0000110; // 1
             6'b000010: HEX0 = ~7'b1011011; // 2
