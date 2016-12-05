@@ -11,6 +11,11 @@
 9   ----.   J   .---    T   -                   
 */
 
+/*
+If ~(dot ^ dash) == 1: next state will always be present state.
+If (dot & ~dash) or (~dot & dash) is/are invalid: next state will always go back to decoding.
+*/
+
 module morse(Clock, Reset, dot, dash, out);
     input logic Clock, Reset, dot, dash;
     logic [5:0] ps, ns;
@@ -38,6 +43,8 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = E;
                     else if (~dot & dash)
                         ns = T;
+                    else
+                        ns = ps;
                 end
             A:
                 begin
@@ -45,16 +52,24 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = R;
                     else if (~dot & dash)
                         ns = W;
+                    else
+                        ns = ps;
                 end
             B:
                 begin
                     if (dot & ~dash)
                         ns = six;
+                    else if (~dot & dash)
+                        ns = decoding;
+                    else
+                        ns = ps;
                 end
             C:
                 begin
-                    if (~dot & ~dash)
-                        ns = C;
+                    if (dot ^ dash)
+                        ns = decoding;
+                    else
+                        ns = ps;
                 end
             D:
                 begin
@@ -62,6 +77,8 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = B;
                     else if (~dot & dash)
                         ns = X;
+                    else
+                        ns = ps;
                 end
             E:
                 begin
@@ -69,6 +86,15 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = I;
                     else if (~dot & dash)
                         ns = A;
+                    else
+                        ns = ps;
+                end
+            F:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
                 end
             G:
                 begin
@@ -76,6 +102,8 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = Z;
                     else if (~dot & dash)
                         ns = Q;
+                    else
+                        ns = ps;
                 end
             H:
                 begin
@@ -83,11 +111,26 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = five;
                     else if (~dot & dash)
                         ns = four;
+                    else
+                        ns = ps;
+                end
+            I: 
+                begin
+                    if (dot & ~dash)
+                        ns = S;
+                    else if (~dot & dash)
+                        ns = U;
+                    else
+                    ns = ps;
                 end
             J:
                 begin
                     if (~dot & dash)
                         ns = one;
+                    else if (dot & ~dash)
+                        ns = decoding;
+                    else
+                        ns = ps;
                 end
             K:
                 begin
@@ -95,6 +138,15 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = C;
                     else if (~dot & dash)
                         ns = Y;
+                    else
+                        ns = ps;
+                end
+            L:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
                 end
             M:
                 begin
@@ -102,6 +154,8 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = G;
                     else if (~dot & dash)
                         ns = O;
+                    else
+                        ns = ps;
                 end
             N:
                 begin
@@ -109,6 +163,8 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = D;
                     else if (~dot & dash)
                         ns = K;
+                    else
+                        ns = ps;
                 end
             O:
                 begin
@@ -116,11 +172,27 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = beforeEight;
                     else if (~dot & dash)
                         ns = zeroORnine;
+                    else
+                        ns = ps;
                 end
+            P:
+                if ~(dot ^ dash)
+                    ns = ps;
+                else
+                    ns = decoding;
+            Q:
+                if ~(dot ^ dash)
+                    ns = ps;
+                else
+                    ns = decoding;
             R:
                 begin
                     if (dot & ~dash)
                         ns = L;
+                    if (~dot & dash)
+                        ns = decoding;
+                    else
+                        ns = ps;
                 end
             S:
                 begin
@@ -128,6 +200,8 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = H;
                     else if (~dot & dash)
                         ns = V;
+                    else
+                        ns = ps;
                 end
             T:
                 begin
@@ -135,6 +209,8 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = N;
                     else if (~dot & dash)
                         ns = M;
+                    else
+                        ns = ps;
                 end
             U:
                 begin
@@ -142,11 +218,17 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = F;
                     else if (~dot & dash)
                         ns = beforeTwo;
+                    else
+                        ns = ps;
                 end
             V:
                 begin
                     if (~dot & dash)
                         ns = three;
+                    else if (dot & ~dash)
+                        ns = decoding;
+                    else
+                        ns = ps;
                 end
             W:
                 begin
@@ -154,21 +236,45 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = P;
                     else if (~dot & dash)
                         ns = J;
+                    else
+                    ns = ps;
                 end
+            X:
+                if ~(dot ^ dash)
+                    ns = ps;
+                else
+                    ns = decoding;
+            Y:
+                if ~(dot ^ dash)
+                    ns = ps;
+                else
+                    ns = decoding;
             Z:
                 begin
                     if (dot & ~dash)
                         ns = seven;
+                    else if (~dot & dash)
+                        ns = decoding;
+                    else
+                        ns = ps;
                 end
             beforeTwo:
                 begin
                     if (~dot & dash)
                         ns = two;
+                    else if (dot & ~dash)
+                        ns = decoding;
+                    else
+                        ns = ps;
                 end
             beforeEight:
                 begin
                     if (dot & ~dash)
                         ns = eight;
+                    else if (~dot & dash)
+                        ns = decoding;
+                    else
+                        ns = ps;
                 end
             zeroORnine:
                 begin
@@ -176,14 +282,81 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = zero;
                     else if (dot & ~dash)
                         ns = nine;
+                    else
+                        ns = ps;
                 end
-            default: 
+            zero:
                 begin
-                    if (~dot & ~dash)
+                    if ~(dot ^ dash)
                         ns = ps;
                     else
                         ns = decoding;
                 end
+            one:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end            
+            two:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end
+            three:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end
+            four:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end
+            five:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end
+            six:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end
+            seven:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end
+            eight:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end
+            nine:
+                begin
+                    if ~(dot ^ dash)
+                        ns = ps;
+                    else
+                        ns = decoding;
+                end
+            default: 
+                ns = decoding;                
         endcase
     end
 
@@ -194,4 +367,35 @@ module morse(Clock, Reset, dot, dash, out);
             ps <= decoding;
         else
             ps <= ns;
+endmodule
+
+module morse_testbench();
+    logic clk, reset, dot, dash, out;
+
+    inputParser dut (clk, reset, dot, dash, out);
+
+    // Set up the clock.
+    parameter CLOCK_PERIOD=100;
+    initial begin
+        clk <= 0;
+        forever #(CLOCK_PERIOD/2) clk <= ~clk;
+    end
+
+    // Set up the inputs to the design. Each line is a clock cycle.
+    initial begin
+        reset <= 1;                                     @(posedge clk);
+        reset <= 0; dot <= 1;                           @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+        dot <= 0; dash <= 1;                            @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+        dot <= 1;                                       @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+        $stop;
+    end
 endmodule

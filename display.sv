@@ -40,7 +40,7 @@ module display(state, HEX0);
             6'b100001: HEX0 = ~7'b1001111; // X
             6'b100010: HEX0 = ~7'b1100110; // Y
             6'b100011: HEX0 = ~7'b1101101; // Z
-            6'b000110: HEX0 = ~7'b1111101; // special states 
+            6'b: HEX0 = ~7'b1111101; // special states 
             default:   
                 begin
                        HEX0 = ~7'b1111111;
