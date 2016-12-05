@@ -91,7 +91,7 @@ module morse(Clock, Reset, dot, dash, out);
                 end
             F:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
@@ -143,7 +143,7 @@ module morse(Clock, Reset, dot, dash, out);
                 end
             L:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
@@ -176,12 +176,12 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = ps;
                 end
             P:
-                if ~(dot ^ dash)
+                if (~(dot ^ dash))
                     ns = ps;
                 else
                     ns = decoding;
             Q:
-                if ~(dot ^ dash)
+                if (~(dot ^ dash))
                     ns = ps;
                 else
                     ns = decoding;
@@ -240,12 +240,12 @@ module morse(Clock, Reset, dot, dash, out);
                     ns = ps;
                 end
             X:
-                if ~(dot ^ dash)
+                if (~(dot ^ dash))
                     ns = ps;
                 else
                     ns = decoding;
             Y:
-                if ~(dot ^ dash)
+                if (~(dot ^ dash))
                     ns = ps;
                 else
                     ns = decoding;
@@ -287,70 +287,70 @@ module morse(Clock, Reset, dot, dash, out);
                 end
             zero:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end
             one:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end            
             two:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end
             three:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end
             four:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end
             five:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end
             six:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end
             seven:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end
             eight:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
                 end
             nine:
                 begin
-                    if ~(dot ^ dash)
+                    if (~(dot ^ dash))
                         ns = ps;
                     else
                         ns = decoding;
@@ -370,9 +370,10 @@ module morse(Clock, Reset, dot, dash, out);
 endmodule
 
 module morse_testbench();
-    logic clk, reset, dot, dash, out;
+    logic clk, reset, dot, dash;
+	logic [5:0] out;
 
-    inputParser dut (clk, reset, dot, dash, out);
+    morse dut (clk, reset, dot, dash, out);
 
     // Set up the clock.
     parameter CLOCK_PERIOD=100;
@@ -388,6 +389,10 @@ module morse_testbench();
                                                         @(posedge clk);
                                                         @(posedge clk);
         dot <= 0; dash <= 1;                            @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
                                                         @(posedge clk);
                                                         @(posedge clk);
                                                         @(posedge clk);
