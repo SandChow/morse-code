@@ -224,7 +224,7 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // O
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
+                    HEX2 = ~7'b1011100;
                     HEX3 = ~7'b0000000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
@@ -242,7 +242,7 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // Q
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
+                    HEX2 = ~7'b1100111;
                     HEX3 = ~7'b0000000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
@@ -251,7 +251,7 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // R
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
+                    HEX2 = ~7'b1010000;
                     HEX3 = ~7'b0000000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
@@ -260,7 +260,7 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // S
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
+                    HEX2 = ~7'b0101101;
                     HEX3 = ~7'b0000000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
@@ -269,8 +269,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // T
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
-                    HEX3 = ~7'b0000000;
+                    HEX2 = ~7'b0110001;
+                    HEX3 = ~7'b0000001;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
@@ -278,7 +278,7 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // U
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
+                    HEX2 = ~7'b0111110;
                     HEX3 = ~7'b0000000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
@@ -287,8 +287,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // V
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
-                    HEX3 = ~7'b0000000;
+                    HEX2 = ~7'b0000110;
+                    HEX3 = ~7'b0110000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
@@ -296,8 +296,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // W
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
-                    HEX3 = ~7'b0000000;
+                    HEX2 = ~7'b0111110;
+                    HEX3 = ~7'b0111110;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
@@ -305,8 +305,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // X
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
-                    HEX3 = ~7'b0000000;
+                    HEX2 = ~7'b1100101;
+                    HEX3 = ~7'b1010011;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
@@ -314,7 +314,7 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // Y
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
+                    HEX2 = ~7'b1100110;
                     HEX3 = ~7'b0000000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
@@ -323,19 +323,19 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // Z
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
+                    HEX2 = ~7'b1011011;
                     HEX3 = ~7'b0000000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
-            default: 
+            default: // special or unused states
                 begin 
-                    HEX0 = ~7'b0000000; // special or unused states
-                    HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0111111;
-                    HEX3 = ~7'b0000000;
-                    HEX4 = ~7'b0000000;
-                    HEX5 = ~7'b0000000;
+                    HEX0 = ~7'b1011110; // D
+                    HEX1 = ~7'b1111001; // E
+                    HEX2 = ~7'b0111001; // C
+                    HEX3 = ~7'b1011100; // O
+                    HEX4 = ~7'b1011110; // D
+                    HEX5 = ~7'b1111001; // E
                 end 
         endcase
     end
