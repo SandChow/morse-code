@@ -5,20 +5,20 @@ module inputParser(Clock, Reset, unparsed, dot, dash);
     input logic Clock, Reset, unparsed;
     logic tmp, parsed;
 
-    Dflipflop first (.Clock, .Reset, .d(unparsed), .q(tmp));
-    Dflipflop second (.Clock, .Reset, .d(tmp), .q(parsed);
+    Dflipflop first (.Clock, .Reset, .d(~unparsed), .q(tmp));
+    Dflipflop second (.Clock, .Reset, .d(tmp), .q(parsed));
 
     logic ps, ns;
     logic [9:0] counter;
     output logic dot, dash;
 
     always_comb begin
-        if (~parsed & counter > 10'b0000000000 & counter < 10'b0000000003)
+        if (~parsed & counter > 10'b0000000000 & counter < 10'b0000000011)
             begin
                 dot = 1;
                 dash = 0;
             end
-        else if (~parsed & counter > 10'b0000000003)
+        else if (~parsed & counter > 10'b0000000011)
             begin
                 dot = 0;
                 dash = 1;
@@ -31,10 +31,10 @@ module inputParser(Clock, Reset, unparsed, dot, dash);
     end
 
     always_ff @(posedge Clock)
-        if (parsed & ~reset)
+        if (parsed & ~Reset)
             counter <= counter + 10'b0000000001;
         else
-            count <= 10'b0;
+            counter <= 10'b0;
 endmodule
 
 module inputParser_testbench();

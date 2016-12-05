@@ -4,9 +4,9 @@ module Dflipflop(Clock, Reset, d, q);
 
     always_ff @(posedge Clock)
         if (Reset)
-            q <= 0;
+        q <= 0;
         else
-            q <= d;
+        q <= d;
 endmodule
 
 module Dflipflop_testbench();
