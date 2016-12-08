@@ -1,3 +1,4 @@
+
 module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
     input logic [5:0] state;
     output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
@@ -260,7 +261,7 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // S
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0101101;
+                    HEX2 = ~7'b1101101;
                     HEX3 = ~7'b0000000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
@@ -287,8 +288,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // V
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0000110;
-                    HEX3 = ~7'b0110000;
+                    HEX2 = ~7'b0110000;
+                    HEX3 = ~7'b0000110;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
@@ -305,8 +306,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // X
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b1100101;
-                    HEX3 = ~7'b1010011;
+                    HEX2 = ~7'b1000110;
+                    HEX3 = ~7'b1110000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end

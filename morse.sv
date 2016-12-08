@@ -189,7 +189,7 @@ module morse(Clock, Reset, dot, dash, out);
                 begin
                     if (dot & ~dash)
                         ns = L;
-                    if (~dot & dash)
+                    else if (~dot & dash)
                         ns = decoding;
                     else
                         ns = ps;
