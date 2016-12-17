@@ -44,7 +44,7 @@ module DE1_SoC_testbench();
 
     // Set up the inputs to the design. Each line is a clock cycle.
     initial begin
-																	     @(posedge clk);
+							@(posedge clk);
         SW[9] <= 1;                                     @(posedge clk);
                                                         @(posedge clk);		  
         SW[9] <= 0;KEY[0] <= 0;                         @(posedge clk);
@@ -53,7 +53,7 @@ module DE1_SoC_testbench();
                                                         @(posedge clk);
                                                         @(posedge clk);
                                                         @(posedge clk);
-        KEY[0] <= 1;					                       @(posedge clk);
+        KEY[0] <= 1;					@(posedge clk);
         KEY[0] <= 0;                                    @(posedge clk);
         KEY[0] <= 1;                                    @(posedge clk);
         KEY[0] <= 0;                                    @(posedge clk);
