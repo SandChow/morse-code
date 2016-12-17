@@ -13,16 +13,16 @@ module DE1_SoC(CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
     // Hook up FSM inputs and outputs.
     logic Reset, dot, dash;
     assign Reset = SW[9]; // Reset when SW[9] is on.
-	 assign HEX0 = 7'b1111111;
+    assign HEX0 = 7'b1111111;
     assign HEX1 = 7'b1111111;
     assign HEX2 = 7'b1111111;
     assign HEX3 = 7'b1111111;
     assign HEX4 = 7'b1111111;
-	 assign HEX5 = 7'b1111111;
+    assign HEX5 = 7'b1111111;
 	 
     inputParser dotORdash (.Clock(clk[whichClock]), .Reset, .unparsed(KEY[0]), .dot, .dash);
 
-	 assign LEDR = {clk[whichClock], 1'b0, Reset, 1'b0, dot, dash};
+    assign LEDR = {clk[whichClock], 1'b0, Reset, 1'b0, dot, dash};
 
 endmodule
 
