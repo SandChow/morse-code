@@ -176,15 +176,19 @@ module morse(Clock, Reset, dot, dash, out);
                         ns = ps;
                 end
             P:
-                if (~(dot ^ dash))
-                    ns = ps;
-                else
-                    ns = decoding;
+					begin
+						 if (~(dot ^ dash))
+							  ns = ps;
+						 else
+							  ns = decoding;
+					end
             Q:
-                if (~(dot ^ dash))
-                    ns = ps;
-                else
-                    ns = decoding;
+					begin
+						 if (~(dot ^ dash))
+							  ns = ps;
+						 else
+							  ns = decoding;
+					end
             R:
                 begin
                     if (dot & ~dash)
@@ -240,15 +244,19 @@ module morse(Clock, Reset, dot, dash, out);
                     ns = ps;
                 end
             X:
-                if (~(dot ^ dash))
-                    ns = ps;
-                else
-                    ns = decoding;
+					begin
+						 if (~(dot ^ dash))
+							  ns = ps;
+						 else
+							  ns = decoding;
+					end
             Y:
-                if (~(dot ^ dash))
-                    ns = ps;
-                else
-                    ns = decoding;
+					begin
+						 if (~(dot ^ dash))
+							  ns = ps;
+						 else
+							  ns = decoding;
+					end
             Z:
                 begin
                     if (dot & ~dash)

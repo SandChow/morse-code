@@ -1,4 +1,3 @@
-
 module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
     input logic [5:0] state;
     output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
@@ -189,8 +188,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // K
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b1100101;
-                    HEX3 = ~7'b1010011;
+                    HEX2 = ~7'b0110001;
+                    HEX3 = ~7'b0001111;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
@@ -288,8 +287,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // V
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b0110000;
-                    HEX3 = ~7'b0000110;
+                    HEX2 = ~7'b0000110;
+                    HEX3 = ~7'b0110000;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
@@ -306,8 +305,8 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                 begin 
                     HEX0 = ~7'b0000000; // X
                     HEX1 = ~7'b0000000;
-                    HEX2 = ~7'b1000110;
-                    HEX3 = ~7'b1110000;
+                    HEX2 = ~7'b0111001;
+                    HEX3 = ~7'b0001111;
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
@@ -329,15 +328,57 @@ module display(state, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
                     HEX4 = ~7'b0000000;
                     HEX5 = ~7'b0000000;                    
                 end
+				6'b100101:
+					begin
+                    HEX0 = ~7'b1000000; // beforeTwo
+                    HEX1 = ~7'b1010000;
+                    HEX2 = ~7'b0111111;
+                    HEX3 = ~7'b0110001;
+                    HEX4 = ~7'b1011101;
+                    HEX5 = ~7'b1011110; 					
+					end
+				6'b100110:
+					begin
+                    HEX0 = ~7'b1000000; // beforeEight
+                    HEX1 = ~7'b1010000;
+                    HEX2 = ~7'b0111111;
+                    HEX3 = ~7'b0110001;
+                    HEX4 = ~7'b1011101;
+                    HEX5 = ~7'b1011110; 					
+					end
+				6'b100111:
+					begin
+                    HEX0 = ~7'b1000000; // zeroORnine
+                    HEX1 = ~7'b1010000;
+                    HEX2 = ~7'b0111111;
+                    HEX3 = ~7'b0110001;
+                    HEX4 = ~7'b1011101;
+                    HEX5 = ~7'b1011110; 					
+					end
             default: // special or unused states
                 begin 
-                    HEX0 = ~7'b1011110; // D
-                    HEX1 = ~7'b1111001; // E
-                    HEX2 = ~7'b0111001; // C
-                    HEX3 = ~7'b1011100; // O
-                    HEX4 = ~7'b1011110; // D
-                    HEX5 = ~7'b1111001; // E
+                    HEX0 = ~7'b1111001; // E
+                    HEX1 = ~7'b1011110; // D
+                    HEX2 = ~7'b1011100; // O
+                    HEX3 = ~7'b0111001; // C
+                    HEX4 = ~7'b1111001; // E
+                    HEX5 = ~7'b1011110; // D
                 end 
         endcase
     end
+endmodule
+
+module display_testbench();
+	logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
+	logic [5:0] state;
+	
+
+	display dut (.state, .HEX0, .HEX1, .HEX2, .HEX3, .HEX4, .HEX5);
+	// Try all combinations of inputs.
+	integer i;
+	initial begin
+		for(i = 0; i <64; i++) begin
+			state = i; #10;
+		end
+	end
 endmodule

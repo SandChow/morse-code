@@ -7,22 +7,20 @@ module DE1_SoC(CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 
     // Generate clk off of CLOCK_50, whichClock picks rate.
     logic [31:0] clk;
-    parameter whichClock = 25;
+    parameter whichClock = 0;
     clock_divider cdiv (CLOCK_50, clk); 
 
     // Hook up FSM inputs and outputs.
-    logic Reset, dot, dash;
+    logic Reset, correct, dot, dash;
+	 logic [5:0] state;
     assign Reset = SW[9]; // Reset when SW[9] is on.
-    assign HEX0 = 7'b1111111;
-    assign HEX1 = 7'b1111111;
-    assign HEX2 = 7'b1111111;
-    assign HEX3 = 7'b1111111;
-    assign HEX4 = 7'b1111111;
-    assign HEX5 = 7'b1111111;
+	 assign correct = SW[8];
 	 
-    inputParser dotORdash (.Clock(clk[whichClock]), .Reset, .unparsed(KEY[0]), .dot, .dash);
+    inputParser dotORdash (.Clock(CLOCK_50), .Reset, .unparsed(KEY[0]), .dot, .dash);
+	 morse 		 decode (.Clock(CLOCK_50), .Reset, .dot, .dash, .out(state));  
+	 display     seg7 (.state, .HEX0, .HEX1, .HEX2, .HEX3, .HEX4, .HEX5); 
 
-    assign LEDR = {clk[whichClock], 1'b0, Reset, 1'b0, dot, dash};
+	 assign LEDR = {correct, clk[whichClock], 1'b0, Reset, 1'b0, dot, dash};
 
 endmodule
 
@@ -44,36 +42,90 @@ module DE1_SoC_testbench();
 
     // Set up the inputs to the design. Each line is a clock cycle.
     initial begin
-							@(posedge clk);
+																	     @(posedge clk);
+        SW[9] <= 1;                                     @(posedge clk);
+                                                        @(posedge clk);		  
+        SW[9] <= 0;KEY[0] <= 1;                         @(posedge clk);
+                                                        @(posedge clk);	 
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+        KEY[0] <= 0;					                       @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);		  
+                                                        @(posedge clk);	 
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk); 
+                                                        @(posedge clk);	 
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 1;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);
+		 																  @(posedge clk);
         SW[9] <= 1;                                     @(posedge clk);
                                                         @(posedge clk);		  
         SW[9] <= 0;KEY[0] <= 0;                         @(posedge clk);
                                                         @(posedge clk);	 
                                                         @(posedge clk);
                                                         @(posedge clk);
+                                                        @(posedge clk); 
+                                                        @(posedge clk);	 
                                                         @(posedge clk);
                                                         @(posedge clk);
-        KEY[0] <= 1;					@(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
+                                                        @(posedge clk);
         KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);		  
+                                                        @(posedge clk);	 
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk); 
+                                                        @(posedge clk);	 
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
         KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
+        KEY[0] <= 0;                                    @(posedge clk);																		
+                                                        @(posedge clk);
+                                                        @(posedge clk); 
+                                                        @(posedge clk);	 
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk);	 
+                                                        @(posedge clk);
+                                                        @(posedge clk);
         KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
-        KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
-        KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
-        KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
-        KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
-        KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);
-        KEY[0] <= 1;                                    @(posedge clk);
-        KEY[0] <= 0;                                    @(posedge clk);  																	  
+        KEY[0] <= 0;                                    @(posedge clk);																		  
+                                                        @(posedge clk); 
+                                                        @(posedge clk);	 
+                                                        @(posedge clk);
+                                                        @(posedge clk);
+                                                        @(posedge clk); 																		  
+		   																		  
+		  
         $stop; // End the simulation.
     end
 endmodule 
